@@ -10,17 +10,17 @@ async function goFetch() {
     }
 }
 
-
-async function renderNames(people) {
-    people = Array.from(people);
+async function renderNames() {
+    let people = await goFetch();
+    people = people.results;
     namesList = document.getElementById('names');
-    people.forEach(function(person){
+    const html = people.map(function(person){
         const item = `<li>${person.name}</li>`;
-        namesList.appendChild(item);
-    });
+        return item;
+    }).join('');
+    namesList.innerHTML += html;
 }
 
-// const starWarsPeople = goFetch().then(renderNames);
+renderNames();
 
-console.log(goFetch());
 
