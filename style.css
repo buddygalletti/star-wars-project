@@ -1,0 +1,13 @@
+.flex-container {
+    display: flex;
+}
+
+#people {
+    display: flex;
+    flex: 1;
+}
+
+#info {
+    display: flex;
+    flex: 1;
+}
