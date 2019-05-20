@@ -1,33 +1,49 @@
+// go get the swapi people data from every page
 async function goFetch() {
     try {
-        const response = await fetch('https://swapi.co/api/people/?format=json');
-        const data = await response.json();
-        return data;
+        const pageData = [];
+        let url = 'https://swapi.co/api/people/';
+        while(url !== null) {
+            const response = await fetch(url);
+            let data = await response.json();
+            pageData.push(data.results);
+            url = data.next;
+        }
+        console.log(pageData);
+        return pageData;
     } catch (error) {
         console.error(error);
     }
 }
 
+
+// populate the people div with every name we fetched
 async function renderNames() {
     try {
-        let people = await goFetch();
-        people = people.results;
+        const people = await goFetch();
+        console.log(people);
         namesList = document.getElementById('names');
-        const html = people.map(function(person){
-            const item = `<li>${person.name}</li>`;
-            return item;
-        }).join('');
-        namesList.innerHTML += html;
+        for(let i = 0; i < people.length; i++){
+            let peopleFromPage = people[i];
+            const html = peopleFromPage.map(function(person){
+                const item = `<li>${person.name}</li>`;
+                return item;
+            }).join('');
+            console.log(html);
+            namesList.innerHTML += html;
+        }
     } catch (error) {
         console.log(error);
     }
 }
 
-// const container = document.getElementsByClassName('flex-container');
-// console.log(container);
-// container.addEventListener('click', function(event){
-//     console.log(event.target);
-// });
+
+// add all the event listener stuff here
+const names = document.getElementById('names');
+console.log(names);
+names.addEventListener('click', function(event){
+    console.log(event.target);
+});
 
 
 
