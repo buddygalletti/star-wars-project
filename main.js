@@ -39,7 +39,6 @@ async function renderNames() {
     }
 }
 
-renderNames();
 
 
 // use this function to build a table based on the right person object clicked
@@ -51,8 +50,10 @@ function tableBuilder(obj) {
         if(stat === 'films' || stat === 'species' || stat === 'vehicles' || stat === 'starships') {
             continue;
         }
-        let row = `<tr><td class='stat' style='text-align: left'>${stat[0].toUpperCase() + stat.slice(1)}</td><td style='text-align: right'>${obj[stat]}</td></tr>`;
-        table.innerHTML += row;
+        let row = document.createElement('tr');
+        let tds = `<td class='stat' style='text-align: left'>${stat[0].toUpperCase() + stat.slice(1)}</td><td style='text-align: right'>${obj[stat]}</td>`;
+        row.innerHTML = tds;
+        table.appendChild(row);
     }
     console.log(table)
     return table;
@@ -89,11 +90,4 @@ names.addEventListener('click', function(event){
 
 
 
-
-
-
-
-
-
-
-console.log(peopleObjs);
+renderNames();
