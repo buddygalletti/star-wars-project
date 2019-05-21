@@ -49,12 +49,7 @@ function tableBuilder(obj) {
     for(let stat in stats){
         // console.log(stat, obj[stat]);
         let row = document.createElement('tr');
-        let tdLeft = document.createElement('td');
-        let tdRight = document.createElement('td');
-        tdLeft.innerText = stat;
-        tdRight.innerText = obj[stat];
-        row.appendChild(tdLeft);
-        row.appendChild(tdRight);
+        let tds = `<td>${stat}</td><td>${obj[stat]}</td>`;
         table.appendChild(row);
     }
     console.log(table)
