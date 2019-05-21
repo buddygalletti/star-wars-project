@@ -41,18 +41,18 @@ async function renderNames() {
 renderNames();
 
 
-// use this function to build a tbale based on the right person object clicked
+// use this function to build a table based on the right person object clicked
 function tableBuilder(obj) {
-    const stats = Object.keys(obj);
+    const stats = Array.from(Object.keys(obj));
     console.log(stats);
     let table = document.createElement('table');
     for(let stat in stats){
-        console.log(stat, obj[stat]);
+        // console.log(stat, obj[stat]);
         let row = document.createElement('tr');
         let tdLeft = document.createElement('td');
         let tdRight = document.createElement('td');
-        tdLeft.innerHTML = stat;
-        tdRight.innerHTML = obj[stat];
+        tdLeft.innerText = stat;
+        tdRight.innerText = obj[stat];
         row.appendChild(tdLeft);
         row.appendChild(tdRight);
         table.appendChild(row);
@@ -81,7 +81,8 @@ names.addEventListener('click', function(event){
     nameClicked = event.target.innerHTML;
     for(let i = 0; i < peopleObjs.length; i++){
         if(peopleObjs[i]['name'] === nameClicked){
-            infoDiv.appendChild(tableBuilder(peopleObjs[i]));
+            console.log(peopleObjs[i]);
+            infoDiv.innerHTML = tableBuilder(peopleObjs[i]);
         }
     }
 });
