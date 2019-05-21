@@ -1,3 +1,4 @@
+// fetch the people objects and push them in here
 const peopleObjs = [];
 
 
@@ -43,14 +44,15 @@ renderNames();
 
 // use this function to build a table based on the right person object clicked
 function tableBuilder(obj) {
-    const stats = Array.from(Object.keys(obj));
-    console.log(stats);
     let table = document.createElement('table');
-    for(let stat in stats){
-        // console.log(stat, obj[stat]);
-        let row = document.createElement('tr');
-        let tds = `<td>${stat}</td><td>${obj[stat]}</td>`;
-        table.appendChild(row);
+    // const headers = '<th>Character</th><th>Stats</th>'
+    // table.innerHTML = headers;
+    for(let stat in obj){
+        if(stat === 'films' || stat === 'species' || stat === 'vehicles' || stat === 'starships') {
+            continue;
+        }
+        let row = `<tr><td class='stat' style='text-align: left'>${stat[0].toUpperCase() + stat.slice(1)}</td><td style='text-align: right'>${obj[stat]}</td></tr>`;
+        table.innerHTML += row;
     }
     console.log(table)
     return table;
@@ -65,7 +67,8 @@ const names = document.getElementById('names');
 const listItems = document.getElementsByTagName('li');
 let nameClicked = '';
 
-// this will add bold to li clicked and remove bold from previously clicked
+
+// this will add bold to li clicked and remove bold from previously clicked and then render the info div
 names.addEventListener('click', function(event){
     for(let i = 0; i < listItems.length; i++){
         listItems[i].style.fontWeight = 'normal';
@@ -76,8 +79,9 @@ names.addEventListener('click', function(event){
     nameClicked = event.target.innerHTML;
     for(let i = 0; i < peopleObjs.length; i++){
         if(peopleObjs[i]['name'] === nameClicked){
-            console.log(peopleObjs[i]);
-            infoDiv.innerHTML = tableBuilder(peopleObjs[i]);
+            infoDiv.innerHTML = '';
+            infoDiv.appendChild(tableBuilder(peopleObjs[i]));
+            break;
         }
     }
 });

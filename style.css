@@ -1,5 +1,7 @@
 .flex-container {
     display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 #people {
@@ -12,6 +14,10 @@
     flex: 1;
 }
 
-.bold-text {
+.stat {
     font-weight: bold;
 }
+
+table, th, td {
+    border: 1px solid black;
+  }
